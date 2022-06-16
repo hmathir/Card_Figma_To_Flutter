@@ -17,6 +17,7 @@ class HomeView extends GetView<HomeController> {
       IconlyLight.profile,
     ];
     return Obx(() {
+      int? selectedIndex = 0;
       if (controller.isLoading.value) {
         return Center(
             child: Platform.isAndroid
@@ -24,6 +25,7 @@ class HomeView extends GetView<HomeController> {
                 : CupertinoActivityIndicator());
       }
       return Scaffold(
+
         floatingActionButton: FloatingActionButton(
           onPressed: () {},
           child: Icon(
@@ -42,7 +44,6 @@ class HomeView extends GetView<HomeController> {
           onTap: (int) {},
           gapLocation: GapLocation.center,
           notchSmoothness: NotchSmoothness.smoothEdge,
-
         ),
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -85,62 +86,64 @@ class HomeView extends GetView<HomeController> {
                 child: Padding(
                   padding: EdgeInsets.only(top: 10, left: 1, right: 1),
                   child: Center(
-                    child: Card(
-                      child: Container(
-                        child: Stack(
-                          children: [
-                            Image.asset('assets/images/card2.png'),
-                            Positioned(
-                              top: 10,
-                              left: 10,
-                              child: Text(
-                                'Regular Card',
-                                style: GoogleFonts.dmSans(color: Colors.white),
-                              ),
-                            ),
-                            Positioned(
-                                left: 50,
-                                right: 10,
-                                bottom: 90,
-                                child: Text(
-                                  '1203 1204 2304 1234 1232',
-                                  style: GoogleFonts.dmSans(
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                )),
-                            Positioned(
-                              bottom: 10,
-                              left: 10,
-                              child: Text(
-                                'Softcent',
-                                style: GoogleFonts.dmSans(color: Colors.white),
-                              ),
-                            ),
-                            Positioned(
-                              bottom: 10,
-                              right: 10,
-                              child: Text(
-                                'Payback',
-                                style: GoogleFonts.dmSans(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16),
-                              ),
-                            ),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(14),
+                        gradient: LinearGradient(
+                          colors: [
+                            Color(0xff3aa672),
+                            Color(0xff3fffa2),
                           ],
                         ),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(14),
-                          gradient: LinearGradient(
-                            colors: [
-                              Color(0xff3aa672),
-                              Color(0xff3fffa2),
-                            ],
-                          ),
-                        ),
-                        //declare your widget here
                       ),
+                      child: Stack(
+                        children: [
+                          ClipRRect(
+                              borderRadius: BorderRadius.circular(14.0),
+                              child: Image.asset(
+                                'assets/images/card2.png',
+                              )),
+                          Positioned(
+                            top: 10,
+                            left: 10,
+                            child: Text(
+                              'Regular Card',
+                              style: GoogleFonts.dmSans(color: Colors.white),
+                            ),
+                          ),
+                          Positioned(
+                              left: 50,
+                              right: 10,
+                              bottom: 90,
+                              child: Text(
+                                '1203 1204 2304 1234 1232',
+                                style: GoogleFonts.dmSans(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,),
+                              )),
+                          Positioned(
+                            bottom: 10,
+                            left: 10,
+                            child: Text(
+                              'Softcent',
+                              style: GoogleFonts.dmSans(color: Colors.white),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 10,
+                            right: 10,
+                            child: Text(
+                              'Payback',
+                              style: GoogleFonts.dmSans(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
+                            ),
+                          ),
+                        ],
+                      ),
+                      //declare your widget here
                     ),
                   ),
                 ),
@@ -167,80 +170,93 @@ class HomeView extends GetView<HomeController> {
                     physics: NeverScrollableScrollPhysics(),
                     itemCount: controller.transactionDataList.length,
                     itemBuilder: (context, index) {
-                      return Container(
-                        height: 94,
-                        child: Card(
-                          elevation: 0,
-                          margin: EdgeInsets.all(2),
-                          semanticContainer: true,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 20, right: 20),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
-                              children: [
+                      return GestureDetector(
+                        child: Container(
+                          height: 94,
+                          child: Card(
+                            color: selectedIndex == index? Colors.teal.shade50 : null,
+                            elevation: 0,
+                            margin: EdgeInsets.all(2),
+                            semanticContainer: true,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 20, right: 20),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                children: [
                                   Image.network(
                                     controller.transactionDataList[index].shopLogo
                                         .toString(),
                                     height: 40,
                                     width: 40,
                                   ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(controller
-                                        .transactionDataList[index].shopName),
-                                    Text(
-                                        'Trans ID: ' +
-                                            controller
-                                                .transactionDataList[index]
-                                                .transactionId,
-                                        style: GoogleFonts.dmSans(
-                                            fontSize: 12,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.black54)),
-                                    Row(
-                                      children: [
-                                        Image.asset('assets/images/dp.png'),
-                                        Text(
-                                          ' ' +
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(controller
+                                          .transactionDataList[index].shopName,style: GoogleFonts.dmSans(
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.bold,)),
+                                      Text(
+                                          'Trans ID: ' +
                                               controller
                                                   .transactionDataList[index]
-                                                  .paymentType,
+                                                  .transactionId,
                                           style: GoogleFonts.dmSans(
                                               fontSize: 12,
                                               fontWeight: FontWeight.w400,
-                                              color: Colors.black54),
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                ),
-                                Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  crossAxisAlignment: CrossAxisAlignment.end,
-                                  children: [
-                                    Text(controller
-                                        .transactionDataList[index].timestamp, style: GoogleFonts.dmSans(color: Colors.black54, fontSize: 10),),
-                                    Text(
-                                      '-৳' +
-                                          controller.transactionDataList[index]
-                                              .amountSend
-                                              .toString(),
-                                      style: GoogleFonts.dmSans(color: Colors.red, fontWeight: FontWeight.bold),
-                                    ),
-                                    Text(
-                                      '+৳' +
-                                          controller.transactionDataList[index]
-                                              .amountRecieved
-                                              .toString(),
-                                      style: GoogleFonts.dmSans(color: Colors.green, fontWeight: FontWeight.bold),
-                                    ),
-                                  ],
-                                ),
-                              ],
+                                              color: Colors.black54)),
+                                      Row(
+                                        children: [
+                                          Image.asset('assets/images/dp.png'),
+                                          Text(
+                                            ' ' +
+                                                controller
+                                                    .transactionDataList[index]
+                                                    .paymentType,
+                                            style: GoogleFonts.dmSans(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black54),
+                                          )
+                                        ],
+                                      )
+                                    ],
+                                  ),
+                                  Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Text(
+                                        controller
+                                            .transactionDataList[index].timestamp,
+                                        style: GoogleFonts.dmSans(
+                                            color: Colors.black54, fontSize: 10),
+                                      ),
+                                      Text(
+                                        '-৳' +
+                                            controller.transactionDataList[index]
+                                                .amountSend
+                                                .toString(),
+                                        style: GoogleFonts.dmSans(
+                                            color: Colors.red,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                      Text(
+                                        '+৳' +
+                                            controller.transactionDataList[index]
+                                                .amountRecieved
+                                                .toString(),
+                                        style: GoogleFonts.dmSans(
+                                            color: Colors.green,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
