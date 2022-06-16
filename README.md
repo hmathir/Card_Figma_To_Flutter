@@ -1,16 +1,8 @@
-# softcent_card
+Simple Cash Card App for SoftCent Test.
 
-A new Flutter project.
+<img width="367" alt="Screenshot 2022-06-16 at 9 19 24 PM" src="https://user-images.githubusercontent.com/45460114/174104076-4402d5c4-a9ae-4ff1-a2cd-bdd6e8c3f703.png">
 
-## Getting Started
+<img width="693" alt="Screenshot 2022-06-16 at 9 19 45 PM" src="https://user-images.githubusercontent.com/45460114/174104107-cac9c49a-00ed-41a4-87d6-133b9df19e70.png">
 
-This project is a starting point for a Flutter application.
+<img width="685" alt="Screenshot 2022-06-16 at 9 19 58 PM" src="https://user-images.githubusercontent.com/45460114/174104121-abb890cb-d9bb-46b9-b206-8cf4ff6aa72c.png">
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
